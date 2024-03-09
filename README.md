@@ -1,3 +1,3 @@
+# Routine Planner Backend
 
-# Edufixup-Backend
 nodejs, expressjs, prisma, postgresql.
