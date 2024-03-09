@@ -9,7 +9,7 @@ const timeSlotSchema = z.object({
     .regex(/^\d{2}:\d{2}$/, { message: 'endTime must be in HH:MM format' }),
 });
 
-const CrateScheduleSchema = z.object({
+const CreateScheduleSchema = z.object({
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, {
     message: 'Date must be in YYYY-MM-DD format',
   }),
@@ -18,6 +18,19 @@ const CrateScheduleSchema = z.object({
   studySlots: z.array(timeSlotSchema).default([]), // Ensuring it can be an empty array
 });
 
+const UpdateScheduleSchema = z.object({
+  date: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/, {
+      message: 'Date must be in YYYY-MM-DD format',
+    })
+    .optional(),
+  classes: z.array(timeSlotSchema).default([]), // Ensuring it can be an empty array
+  jobs: z.array(timeSlotSchema).default([]), // Ensuring it can be an empty array
+  studySlots: z.array(timeSlotSchema).default([]), // Ensuring it can be an empty array
+});
+
 export const ScheduleValidation = {
-  CrateScheduleSchema,
+  CreateScheduleSchema,
+  UpdateScheduleSchema,
 };

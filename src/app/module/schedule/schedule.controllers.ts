@@ -44,6 +44,31 @@ const GetAllSchedules = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const UpdateScheduleById = catchAsync(async (req: Request, res: Response) => {
+  /* 
+  #swagger.tags = ['Schedules']
+  #swagger.summary = 'Update Schedule By Id'
+  #swagger.security = [{
+            "BearerAuth": []
+    }]
+  */
+
+  const { id } = req.params;
+  const { date, classes, jobs, studySlots } = req.body;
+  await ScheduleService.updateScheduleById(req?.user?.id, id, {
+    date,
+    classes,
+    jobs,
+    studySlots,
+  });
+
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Schedule Updated By Id Successfully!',
+  });
+});
+
 const DeleteScheduleById = catchAsync(async (req: Request, res: Response) => {
   /* 
   #swagger.tags = ['Schedules']
@@ -66,5 +91,6 @@ const DeleteScheduleById = catchAsync(async (req: Request, res: Response) => {
 export const ScheduleControllers = {
   CreateSchedule,
   GetAllSchedules,
+  UpdateScheduleById,
   DeleteScheduleById,
 };

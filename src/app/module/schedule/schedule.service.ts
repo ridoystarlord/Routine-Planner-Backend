@@ -51,6 +51,12 @@ export class ScheduleService {
   public static async getAllSchedules(userId: string) {
     return prismaClient.schedule.findMany({ where: { userId } });
   }
+  public static updateScheduleById(userId: string, id: string, payload: any) {
+    return prismaClient.schedule.update({
+      where: { id, userId },
+      data: { ...payload },
+    });
+  }
   public static deleteScheduleById(userId: string, id: string) {
     return prismaClient.schedule.delete({
       where: { id, userId },

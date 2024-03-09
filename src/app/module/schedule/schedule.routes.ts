@@ -10,15 +10,15 @@ router.get('/', IsAuthorized, ScheduleControllers.GetAllSchedules);
 router.post(
   '/',
   IsAuthorized,
-  ValidateRequest(ScheduleValidation.CrateScheduleSchema),
+  ValidateRequest(ScheduleValidation.CreateScheduleSchema),
   ScheduleControllers.CreateSchedule
 );
-// router.put(
-//   '/topic/:id',
-//   IsAuthorized,
-//   ValidateRequest(StudyValidation.UpdateStudyTopic),
-//   StudyControllers.UpdateTopicById
-// );
+router.put(
+  '/:id',
+  IsAuthorized,
+  ValidateRequest(ScheduleValidation.UpdateScheduleSchema),
+  ScheduleControllers.UpdateScheduleById
+);
 router.delete('/:id', IsAuthorized, ScheduleControllers.DeleteScheduleById);
 
 export const ScheduleRoutes = router;
