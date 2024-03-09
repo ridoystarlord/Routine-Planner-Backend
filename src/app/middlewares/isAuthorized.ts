@@ -4,7 +4,7 @@ import { Secret } from 'jsonwebtoken';
 import config from '../../config';
 import ApiError from '../../errors/ApiError';
 import { JWT } from '../../helpers/jwtHelpers';
-import { AuthService } from '../module/authentication/auth.service';
+import { UserService } from '../module/user/user.service';
 
 const IsAuthorized = async (
   req: Request,
@@ -19,7 +19,7 @@ const IsAuthorized = async (
     token = token.split('Bearer ')[1];
     const verifiedUser = JWT.verifyToken(token, config.jwt.secret as Secret);
     if (verifiedUser.id) {
-      const findUser = await AuthService.getUserFromID(verifiedUser.id);
+      const findUser = await UserService.getUserFromID(verifiedUser.id);
       req.user = findUser;
     }
     next();
