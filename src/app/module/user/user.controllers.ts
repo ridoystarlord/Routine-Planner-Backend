@@ -47,7 +47,29 @@ const GenerateStudyPlan = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const UpdateUser = catchAsync(async (req: Request, res: Response) => {
+  /* 
+  #swagger.tags = ['User']
+  #swagger.summary = 'Update User'
+  #swagger.security = [{
+            "BearerAuth": []
+    }]
+  */
+  const { name } = req.body;
+  const profile = await UserService.updateUser(req?.user?.id, {
+    name,
+  });
+
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'User Profile Update By Id Successfully!',
+    data: profile,
+  });
+});
+
 export const UserControllers = {
   GetUserProfile,
   GenerateStudyPlan,
+  UpdateUser,
 };

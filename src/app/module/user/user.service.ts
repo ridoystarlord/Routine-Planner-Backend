@@ -17,4 +17,7 @@ export class UserService {
   public static async getUserProfile(id: string) {
     return UserService.getUserFromID(id);
   }
+  public static async updateUser(id: string, payload: any) {
+    return prismaClient.user.update({ where: { id }, data: { ...payload } });
+  }
 }
