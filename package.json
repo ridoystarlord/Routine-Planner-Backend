@@ -4,15 +4,15 @@
   "description": "",
   "main": "src/server.ts",
   "scripts": {
-    "dev:w": "ts-node-dev --respawn --transpile-only src/server.ts",
     "lint:check": "eslint --ignore-path .eslintignore --ext .js,.ts .",
     "lint:fix": "eslint . --fix",
     "prettier:check": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
     "prettier:fix": "prettier --write .",
     "lint-prettier": "yarn lint:check && yarn prettier:check",
-    "migrate": "npx prisma migrate dev",
+    "migrate": "npx prisma db push",
     "generate": "npx prisma generate",
     "studio": "npx prisma studio",
+    "predev": "yarn migrate",
     "dev": "ts-node-dev --respawn --transpile-only src/swagger.ts",
     "build": "tsc",
     "deploy": "pm2 start ./dist/swagger.js --name \"routine-planner-backend\" -p 5000"
