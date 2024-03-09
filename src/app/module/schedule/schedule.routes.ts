@@ -13,5 +13,12 @@ router.post(
   ValidateRequest(ScheduleValidation.CrateScheduleSchema),
   ScheduleControllers.CreateSchedule
 );
+// router.put(
+//   '/topic/:id',
+//   IsAuthorized,
+//   ValidateRequest(StudyValidation.UpdateStudyTopic),
+//   StudyControllers.UpdateTopicById
+// );
+router.delete('/:id', IsAuthorized, ScheduleControllers.DeleteScheduleById);
 
 export const ScheduleRoutes = router;

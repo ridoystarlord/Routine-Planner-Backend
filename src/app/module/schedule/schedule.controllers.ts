@@ -44,7 +44,27 @@ const GetAllSchedules = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const DeleteScheduleById = catchAsync(async (req: Request, res: Response) => {
+  /* 
+  #swagger.tags = ['Schedules']
+  #swagger.summary = 'Delete Schedule By Id'
+  #swagger.security = [{
+            "BearerAuth": []
+    }]
+  */
+
+  const { id } = req.params;
+  await ScheduleService.deleteScheduleById(req?.user?.id, id);
+
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Schedule Deleted By Id Successfully!',
+  });
+});
+
 export const ScheduleControllers = {
   CreateSchedule,
   GetAllSchedules,
+  DeleteScheduleById,
 };

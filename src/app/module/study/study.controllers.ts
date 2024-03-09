@@ -79,13 +79,12 @@ const DeleteTopicById = catchAsync(async (req: Request, res: Response) => {
   */
 
   const { id } = req.params;
-  const topics = await StudyService.deleteTopicById(req?.user?.id, id);
+  await StudyService.deleteTopicById(req?.user?.id, id);
 
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     success: true,
     message: 'Topic Deleted By Id Successfully!',
-    data: topics,
   });
 });
 

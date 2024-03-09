@@ -279,6 +279,35 @@
         }
       }
     },
+    "/api/v1/schedule/{id}": {
+      "delete": {
+        "tags": [
+          "Schedules"
+        ],
+        "summary": "Delete Schedule By Id",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
     "/api/v1/user/profile": {
       "get": {
         "tags": [
