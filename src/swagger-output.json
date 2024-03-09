@@ -88,6 +88,45 @@
         }
       }
     },
+    "/api/v1/study/topic": {
+      "post": {
+        "tags": [
+          "Study"
+        ],
+        "summary": "Add a Topic",
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "topic": {
+                    "example": "any"
+                  },
+                  "priority": {
+                    "example": "any"
+                  },
+                  "duration": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/schedule/": {
       "post": {
         "tags": [

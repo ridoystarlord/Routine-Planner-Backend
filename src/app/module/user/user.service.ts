@@ -48,11 +48,13 @@ export class UserService {
           userId,
           startTime: {
             gte: start,
-            lte: end,
+            lt: new Date(end.getTime() + 24 * 60 * 60 * 1000),
           },
         },
         orderBy: { startTime: 'asc' },
       });
+
+      console.log('studySlots', studySlots);
 
       // Fetch study topics, ordered by priority
       const studyTopics = await prismaClient.studyTopic.findMany({
@@ -87,7 +89,7 @@ export class UserService {
               plan.push({
                 date: currentDayStart.toISOString().split('T')[0], // Only date part
                 ...slot,
-                topic: currentTopic.topic,
+                topic: currentTopic,
                 duration: currentTopic.duration,
               });
 
