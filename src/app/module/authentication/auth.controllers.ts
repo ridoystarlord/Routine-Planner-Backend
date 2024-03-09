@@ -1,14 +1,14 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import config from '../../../config';
 import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
+import { ILogin, IRegister } from './auth.interface';
 import { AuthService } from './auth.service';
 
-const SentOtp = catchAsync(async (req: Request, res: Response) => {
+const RegisterUser = catchAsync(async (req: Request, res: Response) => {
   /* 
   #swagger.tags = ['Authentication']
-  #swagger.summary = 'Sent Otp'
+  #swagger.summary = 'Register User'
   #swagger.requestBody = {
         required: true,
         content: {
@@ -16,63 +16,41 @@ const SentOtp = catchAsync(async (req: Request, res: Response) => {
                 schema: {
                     type:"object",
                     properties:{
-                      mobileNumber:{
+                      name:{
+                        type:"string"
+                      },
+                      email:{
+                        type:"string"
+                      },
+                      password:{
                         type:"string"
                       }
                     }
                 },
                 example:{
-                  mobileNumber:"01712345678",
+                  name:"John Doe",
+                  email:"example@gmail.com",
+                  password:"123456",
                 }  
             }
         }
     } 
   */
-  const { mobileNumber } = req.body;
+  const { name, email, password }: IRegister = req.body;
 
-  if (mobileNumber === '') {
-    return sendResponse(res, {
-      statusCode: StatusCodes.BAD_REQUEST,
-      success: false,
-      message: 'Mobile Number is Required',
-      data: null,
-    });
-  }
-  if (
-    mobileNumber.length < 11 ||
-    mobileNumber.length > 11 ||
-    mobileNumber.includes('+') ||
-    mobileNumber.includes('+8') ||
-    mobileNumber.includes('+88') ||
-    !mobileNumber.startsWith('01')
-  ) {
-    return sendResponse(res, {
-      statusCode: StatusCodes.BAD_REQUEST,
-      success: false,
-      message: 'Please Enter valid Mobile Number',
-      data: null,
-    });
-  }
-
-  const otp = await AuthService.sentOtp(mobileNumber);
+  await AuthService.createUser({ name, email, password });
 
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     success: true,
-    message: 'Otp Sent Successfully!',
-    data:
-      config.env === 'development'
-        ? {
-            otp,
-          }
-        : null,
+    message: 'User Register Successfully!',
   });
 });
 
-const VerifyOtp = catchAsync(async (req: Request, res: Response) => {
+const LoginUser = catchAsync(async (req: Request, res: Response) => {
   /* 
   #swagger.tags = ['Authentication']
-  #swagger.summary = 'Verify Otp and Get  Access Token'
+  #swagger.summary = 'Login User'
   #swagger.requestBody = {
         required: true,
         content: {
@@ -80,35 +58,35 @@ const VerifyOtp = catchAsync(async (req: Request, res: Response) => {
                 schema: {
                     type:"object",
                     properties:{
-                      mobileNumber:{
+                      email:{
                         type:"string"
                       },
-                      otpCode:{
+                      password:{
                         type:"string"
                       }
                     }
-                }, 
+                },
                 example:{
-                  mobileNumber:"01712345678",
-                  otpCode:"1234"
-                } 
+                  email:"example@gmail.com",
+                  password:"123456",
+                }  
             }
         }
     } 
   */
-  const { mobileNumber, otpCode } = req.body;
+  const { email, password }: ILogin = req.body;
 
-  const token = await AuthService.verifyOtp({ mobileNumber, otpCode });
+  const token = await AuthService.getUserToken({ email, password });
 
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     success: true,
-    message: 'Otp Verified Successfully!',
-    data: token,
+    message: 'User Login Successfully!',
+    data: { token },
   });
 });
 
 export const AuthControllers = {
-  SentOtp,
-  VerifyOtp,
+  RegisterUser,
+  LoginUser,
 };

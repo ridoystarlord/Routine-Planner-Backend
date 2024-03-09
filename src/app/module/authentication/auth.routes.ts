@@ -6,14 +6,14 @@ import { AuthValidation } from './auth.validation';
 const router = express.Router();
 
 router.post(
-  '/sent-otp',
-  ValidateRequest(AuthValidation.sentOtp),
-  AuthControllers.SentOtp
+  '/register',
+  ValidateRequest(AuthValidation.Register),
+  AuthControllers.RegisterUser
 );
 router.post(
-  '/verify-otp',
-  ValidateRequest(AuthValidation.VerifyOtp),
-  AuthControllers.VerifyOtp
+  '/login',
+  ValidateRequest(AuthValidation.Login),
+  AuthControllers.LoginUser
 );
 
 export const AuthRoutes = router;

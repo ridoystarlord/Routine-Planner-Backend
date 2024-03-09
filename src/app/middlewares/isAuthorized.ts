@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status';
 import { Secret } from 'jsonwebtoken';
-import { prismaClient } from '../../Database';
 import config from '../../config';
 import ApiError from '../../errors/ApiError';
 import { JWT } from '../../helpers/jwtHelpers';
+import { AuthService } from '../module/authentication/auth.service';
 
 const IsAuthorized = async (
   req: Request,
@@ -19,12 +19,7 @@ const IsAuthorized = async (
     token = token.split('Bearer ')[1];
     const verifiedUser = JWT.verifyToken(token, config.jwt.secret as Secret);
     if (verifiedUser.id) {
-      const findUser = await prismaClient.user.findUnique({
-        where: { id: verifiedUser.id },
-        include: {
-          Instructor: true,
-        },
-      });
+      const findUser = await AuthService.getUserFromID(verifiedUser.id);
       req.user = findUser;
     }
     next();
