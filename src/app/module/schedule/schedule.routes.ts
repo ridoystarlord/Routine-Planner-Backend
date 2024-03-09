@@ -4,6 +4,7 @@ import { ScheduleControllers } from './schedule.controllers';
 
 const router = express.Router();
 
-router.post('/', IsAuthorized, ScheduleControllers.createSchedule);
+router.get('/', IsAuthorized, ScheduleControllers.GetAllSchedules);
+router.post('/', IsAuthorized, ScheduleControllers.CreateSchedule);
 
 export const ScheduleRoutes = router;

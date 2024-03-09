@@ -4,7 +4,7 @@ import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
 import { ScheduleService } from './schedule.service';
 
-const createSchedule = catchAsync(async (req: Request, res: Response) => {
+const CreateSchedule = catchAsync(async (req: Request, res: Response) => {
   /* 
   #swagger.tags = ['Schedules']
   #swagger.summary = 'Add a user single day schedule'
@@ -26,7 +26,25 @@ const createSchedule = catchAsync(async (req: Request, res: Response) => {
     message: 'User Schedule Added Successfully!',
   });
 });
+const GetAllSchedules = catchAsync(async (req: Request, res: Response) => {
+  /* 
+  #swagger.tags = ['Schedules']
+  #swagger.summary = 'Get a user all schedules'
+  #swagger.security = [{
+            "BearerAuth": []
+    }]
+  */
+  const schedules = await ScheduleService.getAllSchedules(req?.user?.id);
+
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'User Schedule Retrieved Successfully!',
+    data: schedules,
+  });
+});
 
 export const ScheduleControllers = {
-  createSchedule,
+  CreateSchedule,
+  GetAllSchedules,
 };

@@ -4,7 +4,7 @@ import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
 import { StudyService } from './study.service';
 
-const createTopic = catchAsync(async (req: Request, res: Response) => {
+const CreateTopic = catchAsync(async (req: Request, res: Response) => {
   /* 
   #swagger.tags = ['Study']
   #swagger.summary = 'Add a Topic'
@@ -26,6 +26,25 @@ const createTopic = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const GetAllTopics = catchAsync(async (req: Request, res: Response) => {
+  /* 
+  #swagger.tags = ['Study']
+  #swagger.summary = 'Get All Topics'
+  #swagger.security = [{
+            "BearerAuth": []
+    }]
+  */
+  const topics = await StudyService.getAllTopics(req?.user?.id);
+
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'All Topic Retrieved Successfully!',
+    data: topics,
+  });
+});
+
 export const StudyControllers = {
-  createTopic,
+  CreateTopic,
+  GetAllTopics,
 };

@@ -48,4 +48,7 @@ export class ScheduleService {
       );
     }
   }
+  public static async getAllSchedules(userId: string) {
+    return prismaClient.schedule.findMany({ where: { userId } });
+  }
 }

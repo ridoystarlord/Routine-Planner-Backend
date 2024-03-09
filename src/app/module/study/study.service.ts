@@ -156,4 +156,12 @@ export class StudyService {
       );
     }
   }
+
+  public static async getAllTopics(userId: string) {
+    return prismaClient.studyTopic.findMany({
+      where: {
+        userId,
+      },
+    });
+  }
 }

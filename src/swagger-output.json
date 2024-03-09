@@ -89,6 +89,23 @@
       }
     },
     "/api/v1/study/topic": {
+      "get": {
+        "tags": [
+          "Study"
+        ],
+        "summary": "Get All Topics",
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      },
       "post": {
         "tags": [
           "Study"
@@ -128,6 +145,23 @@
       }
     },
     "/api/v1/schedule/": {
+      "get": {
+        "tags": [
+          "Schedules"
+        ],
+        "summary": "Get a user all schedules",
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      },
       "post": {
         "tags": [
           "Schedules"
