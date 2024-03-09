@@ -164,15 +164,19 @@ export class StudyService {
       },
     });
   }
-  public static async updateTopicById(id: string, payload: any) {
+  public static async updateTopicById(
+    userId: string,
+    id: string,
+    payload: any
+  ) {
     return prismaClient.studyTopic.update({
-      where: { id },
+      where: { id, userId },
       data: { ...payload },
     });
   }
-  public static deleteTopicById(id: string) {
+  public static deleteTopicById(userId: string, id: string) {
     return prismaClient.studyTopic.delete({
-      where: { id },
+      where: { id, userId },
     });
   }
 }

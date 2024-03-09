@@ -55,7 +55,7 @@ const UpdateTopicById = catchAsync(async (req: Request, res: Response) => {
 
   const { id } = req.params;
   const { topic, priority, duration } = req.body;
-  const topics = await StudyService.updateTopicById(id, {
+  const topics = await StudyService.updateTopicById(req?.user?.id, id, {
     topic,
     priority,
     duration,
@@ -79,7 +79,7 @@ const DeleteTopicById = catchAsync(async (req: Request, res: Response) => {
   */
 
   const { id } = req.params;
-  const topics = await StudyService.deleteTopicById(id);
+  const topics = await StudyService.deleteTopicById(req?.user?.id, id);
 
   sendResponse(res, {
     statusCode: StatusCodes.OK,
