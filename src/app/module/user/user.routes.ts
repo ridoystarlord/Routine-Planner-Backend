@@ -1,8 +1,8 @@
 import express from 'express';
 import IsAuthorized from '../../middlewares/isAuthorized';
 import ValidateRequest from '../../middlewares/validateRequest';
+import { StudyValidation } from '../study/study.validation';
 import { UserControllers } from './user.controllers';
-import { StudyValidation } from './user.validation';
 
 const router = express.Router();
 
