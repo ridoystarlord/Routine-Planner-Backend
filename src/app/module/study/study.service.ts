@@ -1,9 +1,13 @@
+import { StudyTopic } from '@prisma/client';
 import { StatusCodes } from 'http-status-codes';
 import { prismaClient } from '../../../Database';
 import ApiError from '../../../errors/ApiError';
 
 export class StudyService {
-  public static async addTopic(userId: string, payload: any) {
+  public static async addTopic(
+    userId: string,
+    payload: any
+  ): Promise<StudyTopic> {
     try {
       const { topic, priority, duration } = payload;
 
@@ -160,7 +164,7 @@ export class StudyService {
     }
   }
 
-  public static async getAllTopics(userId: string) {
+  public static async getAllTopics(userId: string): Promise<StudyTopic[]> {
     return prismaClient.studyTopic.findMany({
       where: {
         userId,
@@ -171,13 +175,16 @@ export class StudyService {
     userId: string,
     id: string,
     payload: any
-  ) {
+  ): Promise<StudyTopic> {
     return prismaClient.studyTopic.update({
       where: { id, userId },
       data: { ...payload },
     });
   }
-  public static deleteTopicById(userId: string, id: string) {
+  public static deleteTopicById(
+    userId: string,
+    id: string
+  ): Promise<StudyTopic> {
     return prismaClient.studyTopic.delete({
       where: { id, userId },
     });
