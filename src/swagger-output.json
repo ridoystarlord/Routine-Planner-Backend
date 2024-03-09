@@ -106,6 +106,41 @@
           }
         ]
       }
+    },
+    "/api/v1/user/study-plan": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get User Study Plan",
+        "description": "",
+        "parameters": [
+          {
+            "name": "startDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
     }
   },
   "components": {

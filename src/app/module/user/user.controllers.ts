@@ -23,6 +23,30 @@ const GetUserProfile = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const GenerateStudyPlan = catchAsync(async (req: Request, res: Response) => {
+  /* 
+  #swagger.tags = ['User']
+  #swagger.summary = 'Get User Study Plan'
+  #swagger.security = [{
+            "BearerAuth": []
+    }]
+  */
+  const { startDate, endDate } = req.query;
+  const plan = await UserService.generateStudyPlan(
+    req?.user?.id,
+    startDate as string,
+    endDate as string
+  );
+
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'User Study Plan Generate Successfully!',
+    data: plan,
+  });
+});
+
 export const UserControllers = {
   GetUserProfile,
+  GenerateStudyPlan,
 };
