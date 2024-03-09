@@ -13,7 +13,10 @@ const CreateScheduleSchema = z.object({
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, {
     message: 'Date must be in YYYY-MM-DD format',
   }),
-  classes: z.array(timeSlotSchema).default([]), // Ensuring it can be an empty array
+  classes: z
+    .array(timeSlotSchema)
+    .max(2, { message: "Classes can't have more than 2 items" })
+    .default([]), // Ensuring it can be an empty array
   jobs: z.array(timeSlotSchema).default([]), // Ensuring it can be an empty array
   studySlots: z.array(timeSlotSchema).default([]), // Ensuring it can be an empty array
 });
@@ -25,7 +28,10 @@ const UpdateScheduleSchema = z.object({
       message: 'Date must be in YYYY-MM-DD format',
     })
     .optional(),
-  classes: z.array(timeSlotSchema).default([]), // Ensuring it can be an empty array
+  classes: z
+    .array(timeSlotSchema)
+    .max(2, { message: "Classes can't have more than 2 items" })
+    .default([]), // Ensuring it can be an empty array
   jobs: z.array(timeSlotSchema).default([]), // Ensuring it can be an empty array
   studySlots: z.array(timeSlotSchema).default([]), // Ensuring it can be an empty array
 });
