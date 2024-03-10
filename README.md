@@ -44,15 +44,13 @@ Run Project Using Docker
 
 To run this project, you will need to add the following environment variables to your .env file.
 
-`NODE_ENV = development`
-
-`PORT = 5000`
-
-`DATABASE_URL = ""`
-
-`JWT_SECRET = 9gaR1trFUFmiChZJ4Cu92DlcTM1ng8FGo91Q00M176HgG4p5D8zlh2F5Yr8C5L58E6H9mkamJywLX78iE434W7ocd6B7uX7Ze6497bb1wzk8kHg9malnR0prqg9qlY1C`
-
-`JWT_EXPIRES_IN = 30d`
+```bash
+  NODE_ENV = development
+  PORT = 5000
+  DATABASE_URL =
+  JWT_SECRET = 9gaR1trFUFmiChZJ4Cu92DlcTM1ng8FGo91Q00M176HgG4p5D8zlh2F5Yr8C5L58E6H9mkamJywLX78iE434W7ocd6B7uX7Ze6497bb1wzk8kHg9malnR0prqg9qlY1C
+  JWT_EXPIRES_IN = 30d
+```
 
 ## Build
 
