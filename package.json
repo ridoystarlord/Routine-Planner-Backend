@@ -15,7 +15,8 @@
     "predev": "yarn migrate",
     "dev": "ts-node-dev --respawn --transpile-only src/swagger.ts",
     "build": "tsc",
-    "deploy": "pm2 start ./dist/swagger.js --name \"routine-planner-backend\" -p 5000"
+    "deploy": "pm2 start ./dist/swagger.js --name \"routine-planner-backend\" -p 5000",
+    "test": "jest --coverage"
   },
   "author": "Ridoy",
   "license": "ISC",
@@ -25,17 +26,22 @@
   "devDependencies": {
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
+    "@types/jest": "^29.5.12",
     "@types/morgan": "^1.9.9",
     "@types/otp-generator": "^4.0.2",
+    "@types/supertest": "^6.0.2",
     "@types/swagger-ui-express": "^4.1.6",
     "@typescript-eslint/eslint-plugin": "^4.0.0",
     "@typescript-eslint/parser": "^4.0.0",
     "eslint": "^7.0.0",
     "eslint-config-prettier": "^8.8.0",
     "husky": "^8.0.3",
+    "jest": "^29.7.0",
     "lint-staged": "^13.2.2",
     "prettier": "^2.8.8",
+    "supertest": "^6.3.4",
     "swagger-autogen": "^2.23.7",
+    "ts-jest": "^29.1.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.0.4"
   },
