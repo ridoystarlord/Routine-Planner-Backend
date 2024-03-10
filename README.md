@@ -48,6 +48,10 @@ To run tests, run the following command
   yarn test
 ```
 
+## Documentation
+
+[Swagger](http://localhost:5000/api-docs/)
+
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file.
