@@ -7,7 +7,6 @@
 ARG NODE_VERSION=20.10.0
 
 ARG PORT=5000
-# ARG PORT=5000
 
 ################################################################################
 # Use node image for base image for all stages.
@@ -56,11 +55,6 @@ FROM base as final
 
 # Use production node environment by default.
 ENV NODE_ENV production
-
-ENV DATABASE_URL mongodb+srv://mehedihasan:tzvPGGgVBOHRSyJn@mehedi.ysnrtsh.mongodb.net/routine-planner?retryWrites=true&w=majority
-ENV JWT_SECRET 9gaR1trFUFmiChZJ4Cu92DlcTM1ng8FGo91Q00M176HgG4p5D8zlh2F5Yr8C5L58E6H9mkamJywLX78iE434W7ocd6B7uX7Ze6497bb1wzk8kHg9malnR0prqg9qlY1C
-ENV JWT_EXPIRES_IN 90d
-ENV PORT 5000
 
 # Run the application as a non-root user.
 USER node
