@@ -53,22 +53,48 @@ export class ScheduleService {
   public static async getAllSchedules(userId: string): Promise<Schedule[]> {
     return prismaClient.schedule.findMany({ where: { userId } });
   }
-  public static updateScheduleById(
+  public static async updateScheduleById(
     userId: string,
     id: string,
     payload: any
   ): Promise<Schedule> {
-    return prismaClient.schedule.update({
-      where: { id, userId },
-      data: { ...payload },
-    });
+    try {
+      const schedule = await prismaClient.schedule.findUnique({
+        where: { id, userId },
+      });
+      if (!schedule) {
+        throw new ApiError(StatusCodes.NOT_FOUND, 'Schedule not found');
+      }
+      return prismaClient.schedule.update({
+        where: { id, userId },
+        data: { ...payload },
+      });
+    } catch (error) {
+      throw new ApiError(
+        StatusCodes.INTERNAL_SERVER_ERROR,
+        'Something went wrong'
+      );
+    }
   }
-  public static deleteScheduleById(
+  public static async deleteScheduleById(
     userId: string,
     id: string
   ): Promise<Schedule> {
-    return prismaClient.schedule.delete({
-      where: { id, userId },
-    });
+    try {
+      const schedule = await prismaClient.schedule.findUnique({
+        where: { id, userId },
+      });
+      if (!schedule) {
+        throw new ApiError(StatusCodes.NOT_FOUND, 'Schedule not found');
+      }
+      return prismaClient.schedule.delete({
+        where: { id, userId },
+      });
+    } catch (error) {
+      throw new ApiError(
+        StatusCodes.INTERNAL_SERVER_ERROR,
+        'Something went wrong'
+      );
+    }
   }
 }

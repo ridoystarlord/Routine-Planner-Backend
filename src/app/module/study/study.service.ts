@@ -176,17 +176,43 @@ export class StudyService {
     id: string,
     payload: any
   ): Promise<StudyTopic> {
-    return prismaClient.studyTopic.update({
-      where: { id, userId },
-      data: { ...payload },
-    });
+    try {
+      const studyTopic = await prismaClient.studyTopic.findUnique({
+        where: { id, userId },
+      });
+      if (!studyTopic) {
+        throw new ApiError(StatusCodes.NOT_FOUND, 'Study Topic not found');
+      }
+      return prismaClient.studyTopic.update({
+        where: { id, userId },
+        data: { ...payload },
+      });
+    } catch (error) {
+      throw new ApiError(
+        StatusCodes.INTERNAL_SERVER_ERROR,
+        'Something went wrong'
+      );
+    }
   }
-  public static deleteTopicById(
+  public static async deleteTopicById(
     userId: string,
     id: string
   ): Promise<StudyTopic> {
-    return prismaClient.studyTopic.delete({
-      where: { id, userId },
-    });
+    try {
+      const studyTopic = await prismaClient.studyTopic.findUnique({
+        where: { id, userId },
+      });
+      if (!studyTopic) {
+        throw new ApiError(StatusCodes.NOT_FOUND, 'Study Topic not found');
+      }
+      return prismaClient.studyTopic.delete({
+        where: { id, userId },
+      });
+    } catch (error) {
+      throw new ApiError(
+        StatusCodes.INTERNAL_SERVER_ERROR,
+        'Something went wrong'
+      );
+    }
   }
 }
