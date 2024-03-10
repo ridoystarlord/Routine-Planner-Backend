@@ -1,11 +1,17 @@
 import request from 'supertest';
 import app from '../../../app';
 
+let email = '';
+
+beforeAll(async () => {
+  email = `nair${new Date().getTime()}@gmail.com`;
+});
+
 describe('Authentication tests', () => {
   test('Register', async () => {
     const res = await request(app)
       .post('/api/v1/auth/register')
-      .send({ name: 'Nair', email: 'nair@gmail.com', password: '123456' });
+      .send({ name: `Nair1`, email: email, password: '123456' });
     expect(res.body).toEqual({
       statusCode: 200,
       message: 'User Register Successfully!',
@@ -15,7 +21,7 @@ describe('Authentication tests', () => {
   test('Login', async () => {
     const res = await request(app)
       .post('/api/v1/auth/login')
-      .send({ email: 'nair@gmail.com', password: '123456' });
+      .send({ email: email, password: '123456' });
     expect(res.body).toEqual({
       statusCode: 200,
       message: 'User Login Successfully!',
