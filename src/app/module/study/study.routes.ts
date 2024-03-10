@@ -6,13 +6,13 @@ import { StudyValidation } from './study.validation';
 
 const router = express.Router();
 
-router.get(
+router.get('/topic', IsAuthorized, StudyControllers.GetAllTopics);
+router.post(
   '/topic',
   IsAuthorized,
   ValidateRequest(StudyValidation.CreateStudyTopic),
-  StudyControllers.GetAllTopics
+  StudyControllers.CreateTopic
 );
-router.post('/topic', IsAuthorized, StudyControllers.CreateTopic);
 router.put(
   '/topic/:id',
   IsAuthorized,
