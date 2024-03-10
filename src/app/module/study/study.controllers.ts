@@ -13,7 +13,7 @@ const CreateTopic = catchAsync(async (req: Request, res: Response) => {
     }]
   */
   const { topic, priority, duration } = req.body;
-  await StudyService.addTopic(req?.user?.id, {
+  const studyTopic = await StudyService.addTopic(req?.user?.id, {
     topic,
     priority,
     duration,
@@ -23,6 +23,7 @@ const CreateTopic = catchAsync(async (req: Request, res: Response) => {
     statusCode: StatusCodes.OK,
     success: true,
     message: 'Topic Added Successfully!',
+    data: studyTopic,
   });
 });
 
