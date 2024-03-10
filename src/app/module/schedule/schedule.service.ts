@@ -32,7 +32,6 @@ export class ScheduleService {
             },
           });
         }
-
         // Insert study slots
         for (const studySlot of studySlots) {
           await prismaTransactionClient.studySlot.create({

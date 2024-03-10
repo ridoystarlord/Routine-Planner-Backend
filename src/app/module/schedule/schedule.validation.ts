@@ -30,7 +30,8 @@ const UpdateScheduleSchema = z.object({
       .regex(/^\d{4}-\d{2}-\d{2}$/, {
         message: 'Date must be in YYYY-MM-DD format',
       })
-      .optional(),
+      .optional()
+      .default(''),
     classes: z
       .array(timeSlotSchema)
       .max(2, { message: "Classes can't have more than 2 items" })
