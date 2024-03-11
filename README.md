@@ -40,6 +40,12 @@ Pull from Docker
   docker pull ridoystarlord/routine-planner-backend
 ```
 
+Run
+
+```bash
+  docker run -e PORT=5000 -e DATABASE_URL=your-mongodb-url -e JWT_SECRET=9gaR1trFUFmiChZJ4Cu92DlcTM1ng8FGo91Q00M176HgG4p5D8zlh2F5Yr8C5L58E6H9mkamJywLX78iE434W7ocd -e JWT_EXPIRES_IN=90d -p 5000:5000 -d ridoystarlord/routine-planner-backend .
+```
+
 ## Running Tests
 
 To run tests, run the following command
