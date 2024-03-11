@@ -34,10 +34,10 @@ Start the server
   yarn dev
 ```
 
-Run Project Using Docker
+Pull from Docker
 
 ```bash
-  docker compose up --build -d
+  docker pull ridoystarlord/routine-planner-backend
 ```
 
 ## Running Tests
