@@ -76,6 +76,26 @@ export class ScheduleService {
       );
     }
   }
+  public static async getScheduleById(
+    userId: string,
+    id: string
+  ): Promise<Schedule> {
+    try {
+      const schedule = await prismaClient.schedule.findUnique({
+        where: { id, userId },
+      });
+      if (!schedule) {
+        throw new ApiError(StatusCodes.NOT_FOUND, 'Schedule not found');
+      }
+      return schedule;
+    } catch (error) {
+      throw new ApiError(
+        StatusCodes.INTERNAL_SERVER_ERROR,
+        'Something went wrong'
+      );
+    }
+  }
+
   public static async deleteScheduleById(
     userId: string,
     id: string

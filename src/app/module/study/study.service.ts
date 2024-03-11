@@ -194,6 +194,25 @@ export class StudyService {
       );
     }
   }
+  public static async getTopicById(
+    userId: string,
+    id: string
+  ): Promise<StudyTopic> {
+    try {
+      const studyTopic = await prismaClient.studyTopic.findUnique({
+        where: { id, userId },
+      });
+      if (!studyTopic) {
+        throw new ApiError(StatusCodes.NOT_FOUND, 'Study Topic not found');
+      }
+      return studyTopic;
+    } catch (error) {
+      throw new ApiError(
+        StatusCodes.INTERNAL_SERVER_ERROR,
+        'Something went wrong'
+      );
+    }
+  }
   public static async deleteTopicById(
     userId: string,
     id: string

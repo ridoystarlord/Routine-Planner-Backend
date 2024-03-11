@@ -7,6 +7,7 @@ import { ScheduleValidation } from './schedule.validation';
 const router = express.Router();
 
 router.get('/', IsAuthorized, ScheduleControllers.GetAllSchedules);
+router.get('/:id', IsAuthorized, ScheduleControllers.GetScheduleById);
 router.post(
   '/',
   IsAuthorized,

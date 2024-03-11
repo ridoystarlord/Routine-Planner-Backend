@@ -44,6 +44,26 @@ const GetAllSchedules = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const GetScheduleById = catchAsync(async (req: Request, res: Response) => {
+  /* 
+  #swagger.tags = ['Schedules']
+  #swagger.summary = 'Get Schedule By Id'
+  #swagger.security = [{
+            "BearerAuth": []
+    }]
+  */
+
+  const { id } = req.params;
+  const schedule = await ScheduleService.getScheduleById(req?.user?.id, id);
+
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Get Schedule By Id Successfully!',
+    data: schedule,
+  });
+});
+
 const UpdateScheduleById = catchAsync(async (req: Request, res: Response) => {
   /* 
   #swagger.tags = ['Schedules']
@@ -91,6 +111,7 @@ const DeleteScheduleById = catchAsync(async (req: Request, res: Response) => {
 export const ScheduleControllers = {
   CreateSchedule,
   GetAllSchedules,
+  GetScheduleById,
   UpdateScheduleById,
   DeleteScheduleById,
 };

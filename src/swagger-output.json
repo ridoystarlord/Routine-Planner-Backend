@@ -145,6 +145,33 @@
       }
     },
     "/api/v1/study/topic/{id}": {
+      "get": {
+        "tags": [
+          "Study"
+        ],
+        "summary": "Get Topic By Id",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      },
       "put": {
         "tags": [
           "Study"
@@ -280,6 +307,33 @@
       }
     },
     "/api/v1/schedule/{id}": {
+      "get": {
+        "tags": [
+          "Schedules"
+        ],
+        "summary": "Get Schedule By Id",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      },
       "put": {
         "tags": [
           "Schedules"

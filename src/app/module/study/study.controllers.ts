@@ -45,6 +45,26 @@ const GetAllTopics = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const GetTopicById = catchAsync(async (req: Request, res: Response) => {
+  /* 
+  #swagger.tags = ['Study']
+  #swagger.summary = 'Get Topic By Id'
+  #swagger.security = [{
+            "BearerAuth": []
+    }]
+  */
+
+  const { id } = req.params;
+  const topics = await StudyService.getTopicById(req?.user?.id, id);
+
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Get Topic By Id Successfully!',
+    data: topics,
+  });
+});
+
 const UpdateTopicById = catchAsync(async (req: Request, res: Response) => {
   /* 
   #swagger.tags = ['Study']
@@ -92,6 +112,7 @@ const DeleteTopicById = catchAsync(async (req: Request, res: Response) => {
 export const StudyControllers = {
   CreateTopic,
   GetAllTopics,
+  GetTopicById,
   UpdateTopicById,
   DeleteTopicById,
 };
