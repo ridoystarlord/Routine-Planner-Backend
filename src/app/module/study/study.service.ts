@@ -1,4 +1,4 @@
-import { StudyTopic } from '@prisma/client';
+import { StudySlot, StudyTopic } from '@prisma/client';
 import { StatusCodes } from 'http-status-codes';
 import { prismaClient } from '../../../Database';
 import ApiError from '../../../errors/ApiError';
@@ -174,6 +174,16 @@ export class StudyService {
       },
     });
   }
+  public static async getAllAvailableTime(
+    userId: string
+  ): Promise<StudySlot[]> {
+    return prismaClient.studySlot.findMany({
+      where: {
+        userId,
+      },
+    });
+  }
+
   public static async updateTopicById(
     userId: string,
     id: string,
@@ -228,6 +238,30 @@ export class StudyService {
         throw new ApiError(StatusCodes.NOT_FOUND, 'Study Topic not found');
       }
       return prismaClient.studyTopic.delete({
+        where: { id, userId },
+      });
+    } catch (error) {
+      throw new ApiError(
+        StatusCodes.INTERNAL_SERVER_ERROR,
+        'Something went wrong'
+      );
+    }
+  }
+  public static async deleteAvailableTimeById(
+    userId: string,
+    id: string
+  ): Promise<StudySlot> {
+    try {
+      const studySlot = await prismaClient.studySlot.findUnique({
+        where: { id, userId },
+      });
+      if (!studySlot) {
+        throw new ApiError(
+          StatusCodes.NOT_FOUND,
+          'Available Time Slots not found'
+        );
+      }
+      return prismaClient.studySlot.delete({
         where: { id, userId },
       });
     } catch (error) {

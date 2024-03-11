@@ -144,6 +144,25 @@
         }
       }
     },
+    "/api/v1/study/available-times": {
+      "get": {
+        "tags": [
+          "Study"
+        ],
+        "summary": "Get All Available Times",
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
     "/api/v1/study/topic/{id}": {
       "get": {
         "tags": [
@@ -212,6 +231,9 @@
                   },
                   "duration": {
                     "example": "any"
+                  },
+                  "isComplete": {
+                    "example": "any"
                   }
                 }
               }
@@ -224,6 +246,35 @@
           "Study"
         ],
         "summary": "Delete Topic By Id",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v1/study/available-times/{id}": {
+      "delete": {
+        "tags": [
+          "Study"
+        ],
+        "summary": "Delete Available Time Slot By Id",
         "description": "",
         "parameters": [
           {

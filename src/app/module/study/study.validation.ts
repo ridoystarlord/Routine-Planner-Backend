@@ -13,6 +13,9 @@ const UpdateStudyTopic = z.object({
     topic: z.string({ required_error: 'Topic Title is required' }).optional(),
     priority: z.number({ required_error: 'Priority is required' }).optional(),
     duration: z.number({ required_error: 'Duration is required' }).optional(),
+    isComplete: z
+      .boolean({ required_error: 'Complete mark is required' })
+      .optional(),
   }),
 });
 

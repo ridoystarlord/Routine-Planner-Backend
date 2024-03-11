@@ -45,6 +45,24 @@ const GetAllTopics = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const GetAllAvailableTime = catchAsync(async (req: Request, res: Response) => {
+  /* 
+  #swagger.tags = ['Study']
+  #swagger.summary = 'Get All Available Times'
+  #swagger.security = [{
+            "BearerAuth": []
+    }]
+  */
+  const topics = await StudyService.getAllAvailableTime(req?.user?.id);
+
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'All Available Time Retrieved Successfully!',
+    data: topics,
+  });
+});
+
 const GetTopicById = catchAsync(async (req: Request, res: Response) => {
   /* 
   #swagger.tags = ['Study']
@@ -75,11 +93,12 @@ const UpdateTopicById = catchAsync(async (req: Request, res: Response) => {
   */
 
   const { id } = req.params;
-  const { topic, priority, duration } = req.body;
+  const { topic, priority, duration, isComplete } = req.body;
   const topics = await StudyService.updateTopicById(req?.user?.id, id, {
     topic,
     priority,
     duration,
+    isComplete,
   });
 
   sendResponse(res, {
@@ -109,10 +128,33 @@ const DeleteTopicById = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const DeleteAvailableTimeById = catchAsync(
+  async (req: Request, res: Response) => {
+    /* 
+  #swagger.tags = ['Study']
+  #swagger.summary = 'Delete Available Time Slot By Id'
+  #swagger.security = [{
+            "BearerAuth": []
+    }]
+  */
+
+    const { id } = req.params;
+    await StudyService.deleteAvailableTimeById(req?.user?.id, id);
+
+    sendResponse(res, {
+      statusCode: StatusCodes.OK,
+      success: true,
+      message: 'Available Time Slot Deleted By Id Successfully!',
+    });
+  }
+);
+
 export const StudyControllers = {
   CreateTopic,
   GetAllTopics,
   GetTopicById,
   UpdateTopicById,
   DeleteTopicById,
+  GetAllAvailableTime,
+  DeleteAvailableTimeById,
 };
