@@ -65,7 +65,7 @@ export class StudyService {
 
       // Fetch study topics, ordered by priority
       const studyTopics = await prismaClient.studyTopic.findMany({
-        where: { userId },
+        where: { userId, isComplete: false },
         orderBy: [
           { priority: 'asc' },
           { duration: 'asc' }, // Assuming shorter durations should come first
@@ -168,6 +168,9 @@ export class StudyService {
     return prismaClient.studyTopic.findMany({
       where: {
         userId,
+      },
+      orderBy: {
+        priority: 'asc',
       },
     });
   }
