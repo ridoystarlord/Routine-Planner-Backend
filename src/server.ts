@@ -5,7 +5,7 @@ import config from './config';
 async function bootstrap() {
   const server: Server = app.listen(config.port, () => {
     console.log(`Server running on port ${config.port}`);
-    console.log(`Docs running on http://localhost:${config.port}/api-docs`);
+    console.log(config.env==="development"?`Docs running on http://localhost:${config.port}/api-docs`:`Docs running on https://routine-planner-api.ridoy.dev/api-docs/`);
   });
 
   const exitHandler = () => {
