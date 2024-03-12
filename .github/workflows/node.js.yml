@@ -10,9 +10,6 @@ on:
 jobs:
   build:
     runs-on: self-hosted
-    environment: Production
-    env:
-      PORT: ${{vars.PORT}}
 
     strategy:
       matrix:
@@ -23,10 +20,8 @@ jobs:
       - name: create env file
         run: |
           touch .env
-          echo PORT="$PORT" >> .env
+          echo PORT=${{ vars.PORT }} >> .env
           cat .env
-        env:
-          PORT: $PORT
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
