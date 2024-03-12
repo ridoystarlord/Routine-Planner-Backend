@@ -26,6 +26,11 @@ jobs:
         run: |
           touch .env
           echo PORT=${{secrets.PORT}} >> .env
+          echo DATABASE_URL=${{secrets.DATABASE_URL}} >> .env
+          echo JWT_EXPIRES_IN=${{secrets.JWT_EXPIRES_IN}} >> .env
+          echo JWT_SECRET=${{secrets.JWT_SECRET}} >> .env
+          echo PORT=${{secrets.PORT}} >> .env
+          echo NODE_ENV=${{secrets.NODE_ENV}} >> .env
           cat .env
       - run: yarn
       - run: yarn run build
