@@ -10,6 +10,9 @@ on:
 jobs:
   build:
     runs-on: self-hosted
+    environment: Production
+    env:
+      PORT: ${{vars.PORT}}
 
     strategy:
       matrix:
